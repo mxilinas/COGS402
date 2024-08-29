@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgrokct4c4bth"]
+
+[ext_resource type="PackedScene" uid="uid://bvbqc0q3uwgon" path="res://prefabs/agent.tscn" id="1_83rx8"]
+[ext_resource type="Script" path="res://scripts/manager.gd" id="1_si6si"]
+[ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="3_j3665"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Sync" type="Node" parent="."]
+script = ExtResource("3_j3665")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(64, 64)
+offset = Vector2(512, 512)
+
+[node name="Env" type="Node2D" parent="."]
+script = ExtResource("1_si6si")
+episode_length = 64
+
+[node name="ColorRect" type="ColorRect" parent="Env"]
+z_index = -1
+z_as_relative = false
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 1088.0
+offset_bottom = 1088.0
+color = Color(0.364706, 0.364706, 0.364706, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="A0" parent="Env" instance=ExtResource("1_83rx8")]
+position = Vector2(896, 896)
+color = Color(0.172549, 0.611765, 1, 1)
+
+[node name="A1" parent="Env" instance=ExtResource("1_83rx8")]
+position = Vector2(256, 256)
+color = Color(0.34902, 0.733333, 0, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Env"]
+offset_left = -360.0
+offset_top = 64.0
+offset_right = 40.0
+offset_bottom = 1088.0
+
+[node name="Info" type="Label" parent="Env/ScrollContainer"]
+layout_mode = 2
